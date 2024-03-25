@@ -32,7 +32,7 @@ export default function SignUp() {
       navigate("/sign-in");
     } catch (error) {
       setLoading(false);
-      setError(data.message);
+      setError(error.message);
     }
   };
 

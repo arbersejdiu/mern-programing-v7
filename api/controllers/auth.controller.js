@@ -21,13 +21,12 @@ export const signup = async (req, res, next) => {
 export const signin = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    const validuser = await User.findOne({ email });
-    if (!validuser) return res.status(401).json({ message: "User not found" });
-
-    const isMatch = bcryptjs.compareSync(password, validuser.password);
-    if (!isMatch) return res.status(401).json({ message: "Invalid password" });
-    const token = jwt.sign({ _id: validuser._id }, process.env.JWT_SECRET);
-    const { password: pass, ...rest } = validuser._doc;
+    const validUser = await User.findOne({ email });
+    if (!validUser) return next(errorHandeler(404, "User not found!"));
+    const validPassword = bcryptjs.compareSync(password, validUser.password);
+    if (!validPassword) return next(errorHandeler(401, "Wrong password!"));
+    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+    const { password: pass, ...rest } = validUser._doc;
     res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
