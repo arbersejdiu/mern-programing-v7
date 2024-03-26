@@ -85,14 +85,14 @@ export default function Profile() {
             name="username"
             placeholder="username"
             className="border p-3 rounded-md "
-            value={currentUser.username}
+            defaultValue={currentUser.username}
           />
           <input
             type="email"
             name="email"
             placeholder="email"
             className="border p-3 rounded-md "
-            value={currentUser.email}
+            defaultValue={currentUser.email}
           />
           <input
             type="password"
