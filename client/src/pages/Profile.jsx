@@ -7,6 +7,17 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
+import {
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  signOutUserStart,
+} from "../redux/user/userSlice";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -15,6 +26,7 @@ export default function Profile() {
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
+  const dispatch = useDispatch();
 
   // Firebase
   // allow read;
@@ -51,11 +63,35 @@ export default function Profile() {
       }
     );
   };
+  const handleChange = e => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      dispatch(updateUserStart());
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(updateUserFailure(data.message));
+        return;
+      }
+      dispatch(updateUserSuccess(data));
+    } catch (error) {
+      dispatch(updateUserFailure(error.message));
+    }
+  };
   return (
     <>
       <div className="max-w-lg mx-auto ">
         <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
-        <form className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 ">
           <input
             onChange={e => setFile(e.target.files[0])}
             type="file"
@@ -66,38 +102,45 @@ export default function Profile() {
           <img
             onClick={() => fileRef.current.click()}
             src={formData.avatar || currentUser.avatar}
-            alt="user"
-            className="rounded-full w-15 h-15 object-cover self-center cursor-pointer my-7"
+            alt="profile"
+            className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
           />
-          <p className="text-center">
+          <p className="text-sm self-center">
             {fileUploadError ? (
-              <span className="text-red-700">Error Image Upload</span>
+              <span className="text-red-700">
+                Error Image upload (image must be less than 2 mb)
+              </span>
             ) : filePerc > 0 && filePerc < 100 ? (
-              <span className="text-slate-700">{`Uploading {filePerc}% `}</span>
+              <span className="text-slate-700">{`Uploading ${filePerc}%`}</span>
             ) : filePerc === 100 ? (
-              <span className="text-green-700 ">Successfully Uploaded!</span>
+              <span className="text-green-700">
+                Image successfully uploaded!
+              </span>
             ) : (
               ""
             )}
           </p>
           <input
             type="text"
-            name="username"
             placeholder="username"
-            className="border p-3 rounded-md "
             defaultValue={currentUser.username}
+            id="username"
+            className="border p-3 rounded-md "
+            onChange={handleChange}
           />
           <input
             type="email"
-            name="email"
+            id="email"
             placeholder="email"
             className="border p-3 rounded-md "
+            onChange={handleChange}
             defaultValue={currentUser.email}
           />
           <input
             type="password"
-            name="password"
+            id="password"
             placeholder="password"
+            onChange={handleChange}
             className="border p-3 rounded-md "
           />
           <button

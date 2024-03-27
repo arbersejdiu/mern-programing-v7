@@ -22,6 +22,7 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    // Update User Slice
     updateUserStart: state => {
       state.loading = true;
     },
@@ -34,6 +35,7 @@ const userSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    // Update User Slice end
     deleteUserStart: state => {
       state.loading = true;
     },
