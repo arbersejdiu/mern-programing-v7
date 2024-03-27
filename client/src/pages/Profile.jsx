@@ -11,13 +11,8 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
-  deleteUserFailure,
-  deleteUserStart,
-  deleteUserSuccess,
-  signOutUserStart,
-} from "../redux/user/userSlice";
+} from "../redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -78,11 +73,14 @@ export default function Profile() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+
       if (data.success === false) {
         dispatch(updateUserFailure(data.message));
         return;
       }
+
       dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
     } catch (error) {
       dispatch(updateUserFailure(error.message));
     }
@@ -133,15 +131,15 @@ export default function Profile() {
             id="email"
             placeholder="email"
             className="border p-3 rounded-md "
-            onChange={handleChange}
             defaultValue={currentUser.email}
+            onChange={handleChange}
           />
           <input
             type="password"
             id="password"
             placeholder="password"
-            onChange={handleChange}
             className="border p-3 rounded-md "
+            onChange={handleChange}
           />
           <button
             type="submit"
