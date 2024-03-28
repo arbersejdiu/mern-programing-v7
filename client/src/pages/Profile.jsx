@@ -127,19 +127,27 @@ export default function Profile() {
       <div className="max-w-lg mx-auto p-4">
         <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 ">
-          <input
-            onChange={e => setFile(e.target.files[0])}
-            type="file"
-            ref={fileRef}
-            hidden
-            accept="image/*"
-          />
-          <img
-            onClick={() => fileRef.current.click()}
-            src={formData.avatar || currentUser.avatar}
-            alt="profile"
-            className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2"
-          />
+          <div className="image-content self-center">
+            <input
+              onChange={e => setFile(e.target.files[0])}
+              type="file"
+              ref={fileRef}
+              hidden
+              accept="image/*"
+            />
+            <span
+              className="span flex justify-center items-center "
+              onClick={() => fileRef.current.click()}>
+              Edit
+            </span>
+            <img
+              onClick={() => fileRef.current.click()}
+              src={formData.avatar || currentUser.avatar}
+              alt="profile"
+              className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2 border-2"
+            />
+          </div>
+
           <p className="text-sm self-center">
             {fileUploadError ? (
               <span className="text-red-700">

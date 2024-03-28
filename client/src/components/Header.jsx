@@ -7,10 +7,10 @@ export default function Header() {
   const { currentUser } = useSelector(state => state.user);
   return (
     <div className="bg-[#4c2aa357] shadow-md">
-      <header className="flex justify-between	items-center max-w-7xl mx-auto p-3">
+      <header className="flex justify-between	items-center max-w-7xl mx-auto px-3">
         <Link to={"/home"}>
           <h1>
-            <img src={Logo} alt="" className="max-w-[150px] md:max-w-64" />
+            <img src={Logo} alt="" className="max-w-[200px]" />
           </h1>
         </Link>
         {/* <form className="bg-slate-100 p-3 rounded-md flex items-center ">
@@ -39,7 +39,7 @@ export default function Header() {
               <img
                 src={currentUser.avatar}
                 alt="photo"
-                className="rounded-full w-11 h-11 object-cover"
+                className="rounded-full w-11 h-11 object-cover border"
               />
             ) : (
               <li className="">

@@ -43,11 +43,11 @@ export default function SignIp() {
 
   return (
     <>
-      <div className="max-w-2xl mx-auto my-7 p-3">
-        <h1 className="text-center text-3xl font-semibold my-7 text-[#1D436E]">
+      <div className="max-w-2xl mx-auto pt-24 p-3">
+        <h1 className="text-center text-3xl font-semibold my-7 text-slate-700">
           Sign In
         </h1>
-        <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input
             type="email"
             id="email"
