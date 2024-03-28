@@ -4,4 +4,12 @@
 
 body {
   background-color: azure;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+  border: 1px solid blue;
 }

@@ -111,9 +111,9 @@ export default function Profile() {
     try {
       dispatch(signOutUserStart());
       const res = await fetch("/api/auth/signout");
-      const data = await res.json();
+      const data = res.json();
       if (data.success === false) {
-        dispatch(deleteUserFailure());
+        dispatch(updateUserFailure());
         return;
       }
       dispatch(deleteUserSuccess(data));
@@ -124,7 +124,7 @@ export default function Profile() {
 
   return (
     <>
-      <div className="max-w-lg mx-auto ">
+      <div className="max-w-lg mx-auto p-4">
         <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 ">
           <input

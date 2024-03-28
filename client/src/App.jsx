@@ -9,7 +9,7 @@ import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter className="border ">
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
