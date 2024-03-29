@@ -19,6 +19,7 @@ import {
   signOutUserStart,
 } from "../redux/user/userSlice.js";
 
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 export default function Profile() {
@@ -194,6 +195,11 @@ export default function Profile() {
             {loading ? "Loading" : "Update"}
           </button>
         </form>
+        <Link to={"/create-listing"}>
+          <button className="bg-slate-700 p-2 rounded-md text-white hover:opacity-95 w-full mt-2">
+            Add New Post
+          </button>
+        </Link>
         <div className="flex justify-between my-2">
           <span
             onClick={handleDeleteUser}
