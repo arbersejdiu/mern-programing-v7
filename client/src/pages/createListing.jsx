@@ -6,14 +6,17 @@ import {
 } from "firebase/storage";
 import React, { useState } from "react";
 import { app } from "../firebase";
-import { get } from "mongoose";
-
+import { current } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 export default function createListing() {
+  const { currentUser } = useSelector(state => state.user);
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
     imageUrls: [],
-    name: "Arber",
+    name: "",
     description: "",
     address: "",
     type: "rent",
@@ -28,6 +31,7 @@ export default function createListing() {
   const [imageUploadError, setImageUploadError] = useState(false);
   console.log(formData);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleImageSubmit = e => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -86,22 +90,83 @@ export default function createListing() {
       imageUrls: formData.imageUrls.filter((_, i) => i !== index),
     });
   };
-  const handleChange = e => {};
+  const handleChange = e => {
+    if (e.target.id === "sale" || e.target.id === "rent") {
+      setFormData({
+        ...formData,
+        type: e.target.id,
+      });
+    }
+    if (
+      e.target.id === "parking" ||
+      e.target.id === "furnished" ||
+      e.target.id === "offer"
+    ) {
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.checked,
+      });
+    }
+
+    if (
+      e.target.type === "number" ||
+      e.target.type === "text" ||
+      e.target.type === "textarea"
+    ) {
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.value,
+      });
+    }
+  };
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      if (formData.imageUrls.length < 1) {
+        return setError("You must upload at least one image");
+      }
+      if (+formData.regularPrice < formData.discountPrice) {
+        return setError("Regular price must be greater than discount price");
+      }
+      setLoading(true);
+      const res = await fetch("/api/listing/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          userRef: currentUser._id,
+        }),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        setError(data.message);
+      }
+      navigate(`/listing/${data._id}`);
+      setLoading(false);
+    } catch (error) {
+      setError(data.message);
+      setLoading(false);
+    }
+  };
   return (
     <>
       <div className="max-w-7xl mx-auto p-3">
         <h1 className="text-center font-semibold text-2xl py-7 text-slate-700">
           Create New Listing
         </h1>
-        <form className="flex flex-col sm:flex-row gap-5">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col sm:flex-row gap-5">
           <div className="flex flex-col gap-4 flex-1">
             <input
               type="text"
               placeholder="Name"
               id="name"
               className="border p-3 rounded-md focus:outline-none"
-              maxLength={62}
-              minLength={10}
+              maxLength={50}
+              minLength={1}
               required
               onChange={handleChange}
               value={formData.name}
@@ -113,7 +178,7 @@ export default function createListing() {
               id="description"
               className="border p-3 rounded-md focus:outline-none"
               maxLength={62}
-              minLength={10}
+              minLength={1}
               required
               onChange={handleChange}
               value={formData.description}
@@ -124,7 +189,7 @@ export default function createListing() {
               id="address"
               className="border p-3 rounded-md focus:outline-none"
               maxLength={62}
-              minLength={10}
+              minLength={1}
               required
               onChange={handleChange}
               value={formData.address}
@@ -190,7 +255,7 @@ export default function createListing() {
                   max="99"
                   className="p-3 border border-gray rounded-md "
                   onChange={handleChange}
-                  checked={formData.bedrooms}
+                  value={formData.bedrooms}
                 />
                 <p>Beds</p>
               </div>
@@ -201,6 +266,8 @@ export default function createListing() {
                   min="1"
                   max="99"
                   className="p-3 border border-gray rounded-md"
+                  onChange={handleChange}
+                  value={formData.bathrooms}
                 />
                 <p>Baths</p>
               </div>
@@ -212,30 +279,36 @@ export default function createListing() {
                 <input
                   type="number"
                   id="regularPrice"
-                  min="1"
-                  max="9999999"
+                  min="0"
+                  max="99999999999"
                   className="p-3 border border-gray rounded-md"
                   required
+                  onChange={handleChange}
+                  value={formData.regularPrice}
                 />
                 <div>
                   <p>Regular Price</p>
                   <span className="text-xs">($/Month)</span>
                 </div>
               </div>
-              <div className="flex gap-2 items-center">
-                <input
-                  type="number"
-                  id="discountPrice"
-                  min="1"
-                  max="9999999"
-                  className="p-3 border border-gray rounded-md"
-                  required
-                />
-                <div>
-                  <p>Disount Price</p>
-                  <span className="text-xs">($/Month)</span>
+              {formData.offer && (
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="number"
+                    id="discountPrice"
+                    min="0"
+                    max="99999999999"
+                    className="p-3 border border-gray rounded-md"
+                    required
+                    onChange={handleChange}
+                    value={formData.discountPrice}
+                  />
+                  <div>
+                    <p>Disount Price</p>
+                    <span className="text-xs">($/Month)</span>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <div className="flex flex-col flex-1 gap-4 my-5">
               <p className="font-semibold text-slate-700">
@@ -282,9 +355,13 @@ export default function createListing() {
                     </button>
                   </div>
                 ))}
-              <button className="p-3 bg-[#4c2aa382] text-white rounded-md hover:opacity-95">
-                Create Listing
+              <button
+                type="submit"
+                disabled={loading || uploading}
+                className="p-3 bg-[#4c2aa382] text-white rounded-md hover:opacity-95">
+                {loading ? "Loading" : "Create Listing"}
               </button>
+              {error && <p className="text-red-500 text-sm">{error}</p>}
             </div>
           </div>
         </form>
