@@ -28,6 +28,8 @@ export default function Profile() {
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
+  const [showListingError, setShowListingError] = useState(false);
+  const [userListings, setUserListings] = useState([]);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const dispatch = useDispatch();
@@ -124,6 +126,21 @@ export default function Profile() {
     }
   };
 
+  const handleShowListings = async e => {
+    try {
+      setShowListingError(false);
+      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const data = await res.json();
+      if (data.success === false) {
+        setShowListingError(true);
+        return;
+      }
+      setUserListings(data);
+      setShowListingError(false);
+    } catch (error) {
+      setShowListingError(true);
+    }
+  };
   return (
     <>
       <div className="max-w-lg mx-auto p-4">
@@ -214,6 +231,39 @@ export default function Profile() {
         <p className="text-green-700 mt-5">
           {updateSuccess ? "Updated successfully" : ""}
         </p>
+        <button onClick={handleShowListings} className="text-green-700">
+          Show Listings
+        </button>
+        {showListingError ? (
+          <p className="text-red-700 mt-5">Something went wrong</p>
+        ) : (
+          ""
+        )}
+        {userListings &&
+          userListings.length > 0 &&
+          userListings.map(listing => (
+            <div
+              key={listing._id}
+              className="p-3 flex justify-between items-center my-5 border">
+              <Link to={`/listing/${listing._id}`}>
+                <img
+                  src={listing.imageUrls[0]}
+                  alt="Listing Cover"
+                  className="w-24 h-24 object-contain"
+                />
+              </Link>
+              <Link
+                to={`/listing/${listing._id}`}
+                className="text-slate-700 font-semibold flex-1 truncate">
+                <p>{listing.name}</p>
+              </Link>
+
+              <div className="flex flex-col">
+                <butto className="text-green-700">Edit</butto>
+                <button className="text-red-700">Delete</button>
+              </div>
+            </div>
+          ))}
       </div>
     </>
   );
