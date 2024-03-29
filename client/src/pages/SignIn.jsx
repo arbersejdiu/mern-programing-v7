@@ -43,7 +43,7 @@ export default function SignIp() {
 
   return (
     <>
-      <div className="max-w-2xl mx-auto pt-24 p-3">
+      <div className="max-w-2xl mx-auto pt-24 p-3 ">
         <h1 className="text-center text-3xl font-semibold my-7 text-slate-700">
           Sign In
         </h1>

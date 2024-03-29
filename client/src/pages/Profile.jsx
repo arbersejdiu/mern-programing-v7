@@ -18,6 +18,7 @@ import {
   signOutUserSuccess,
   signOutUserStart,
 } from "../redux/user/userSlice.js";
+
 import { useDispatch } from "react-redux";
 
 export default function Profile() {
@@ -168,14 +169,14 @@ export default function Profile() {
             placeholder="username"
             defaultValue={currentUser.username}
             id="username"
-            className="border p-3 rounded-md "
+            className="border p-3 rounded-md focus:outline-none"
             onChange={handleChange}
           />
           <input
             type="email"
             id="email"
             placeholder="email"
-            className="border p-3 rounded-md "
+            className="border p-3 rounded-md focus:outline-none"
             defaultValue={currentUser.email}
             onChange={handleChange}
           />
@@ -183,13 +184,13 @@ export default function Profile() {
             type="password"
             id="password"
             placeholder="password"
-            className="border p-3 rounded-md "
+            className="border p-3 rounded-md focus:outline-none"
             onChange={handleChange}
           />
           <button
             disabled={loading}
             type="submit"
-            className="bg-slate-500 p-2 rounded-md text-white hover:opacity-95">
+            className="bg-[#4c2aa382] p-2 rounded-md text-white hover:opacity-95">
             {loading ? "Loading" : "Update"}
           </button>
         </form>
@@ -197,7 +198,7 @@ export default function Profile() {
           <span
             onClick={handleDeleteUser}
             className="text-red-700 cursor-pointer">
-            Delete account
+            Delete permanently account
           </span>
           <span onClick={handleSignOut} className="text-red-600 cursor-pointer">
             Sign Out

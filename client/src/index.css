@@ -7,12 +7,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: "Poppins", sans-serif;
 }
 
-footer {
-  margin-top: auto;
-  border: 1px solid blue;
-}
 .image-content {
   position: relative;
 }
@@ -28,7 +25,7 @@ footer {
   text-align: center;
   top: 10px;
   right: -11px;
-  background-color: rgb(51 65 85);
+  background-color: #4c2aa399;
   color: white;
   border-radius: 100%;
 }
