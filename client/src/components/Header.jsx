@@ -43,15 +43,17 @@ export default function Header() {
             <img src={Logo} alt="" className="max-w-[170px]" />
           </h1>
         </Link>
-        {/* <form className="bg-slate-100 p-3 rounded-md flex items-center ">
+        <form className="bg-slate-200 pl-3 rounded-md items-center hidden sm:flex ">
           <input
             type="text"
             name="search"
             placeholder="Search..."
             className="bg-transparent focus:outline-none w-24 sm:w-64"
           />
-          <FaSearch className="text-slate-500" />
-        </form> */}
+          <span className="bg-[#4c2aa382] p-3 rounded-r-md cursor-pointer">
+            <FaSearch className="text-white" />
+          </span>
+        </form>
         <ul className="flex gap-4 items-center justify-end">
           <Link to="/home">
             <li className="hidden sm:inline text-slate-700 hover:underline font-semibold">

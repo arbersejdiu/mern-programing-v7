@@ -230,7 +230,7 @@ export default function Profile() {
           </button>
         </form>
         <Link to={"/create-listing"}>
-          <button className="bg-slate-700 p-2 rounded-md text-white hover:opacity-95 w-full mt-2">
+          <button className="bg-slate-500 p-2 rounded-md text-white hover:opacity-95 w-full mt-2">
             Add New Post
           </button>
         </Link>
