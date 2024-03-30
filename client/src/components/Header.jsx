@@ -80,7 +80,7 @@ export default function Header() {
                         className="rounded-full w-11 h-11 object-cover border"
                       />
                     </div>
-                    <div slot="header" class="py-2 pr-7">
+                    <div slot="header" class="py-2 pr-7 w-max">
                       <span class="block text-sm text-gray-900 dark:text-white">
                         {currentUser.username}
                       </span>
