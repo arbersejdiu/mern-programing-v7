@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ListingItem from "../components/ListingItem";
 export default function Search() {
   const navigate = useNavigate();
   const [sidebardata, setSidebardata] = useState({
     searchTerm: "",
     type: "all",
     parking: false,
-    furnished: true,
+    furnished: false,
     offer: false,
     sort: "created_at",
     order: "desc",
@@ -203,8 +204,21 @@ export default function Search() {
             </button>
           </form>
         </div>
-        <div className="flex w-64 sm:pl-7 p-3 sm:py-7">
+        <div className="flex flex-col gap-4 sm:pl-7 p-3 sm:py-7">
           <h1 className="font-medium ">Listing Results:</h1>
+          <div className="flex flex-wrap gap-5">
+            {!loading && listings.length === 0 && (
+              <h1 className="text-center text-gray-500">No results found</h1>
+            )}
+            {loading && (
+              <h1 className="text-center text-gray-500">Loading...</h1>
+            )}
+            {!loading &&
+              listings &&
+              listings.map(listing => (
+                <ListingItem key={listing._id} listing={listing} />
+              ))}
+          </div>
         </div>
       </div>
     </>

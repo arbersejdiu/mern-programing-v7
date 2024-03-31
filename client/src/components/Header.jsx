@@ -4,7 +4,7 @@ import { FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import Logo from "../images/logo-final.png";
 import { FaSearch } from "react-icons/fa";
-import { Dropdown } from "flowbite-react";
+import { Dropdown, DropdownItem } from "flowbite-react";
 // import { BellSolid, EyeSolid } from "flowbite-svelte-icons";
 
 import { useDispatch } from "react-redux";
@@ -115,6 +115,14 @@ export default function Header() {
                       </span>
                     </div>
                   </div>
+                  <Link to="/search">
+                    <DropdownItem class="font-semibold text-center px-4 p-2">
+                      <span class="truncate text-sm font-medium flex items-center gap-2">
+                        Search
+                        <FaSearch />
+                      </span>
+                    </DropdownItem>
+                  </Link>
                   <Link to="/dashboard">
                     <Dropdown.Item class="font-semibold text-center px-4 p-2">
                       <span class="block truncate text-sm font-medium">
@@ -122,6 +130,7 @@ export default function Header() {
                       </span>
                     </Dropdown.Item>
                   </Link>
+
                   <Link to="/profile">
                     <Dropdown.Item class="font-semibold text-center px-4 p-2">
                       <span class="block truncate text-sm font-medium">
