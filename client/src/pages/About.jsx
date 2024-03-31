@@ -2,7 +2,7 @@ export default function About() {
   return (
     <>
       <div className="max-w-7xl mx-auto p-3">
-        <h1 className="text-left text-3xl my-7 underline text-[#4c2aa399] font-medium	">
+        <h1 className="text-left text-3xl my-7  text-[#4c2aa399] font-medium	">
           About AE Real Estate
         </h1>
         <p className="text-xl font-normal  mb-4 leading-10	text-justify text-slate-700">

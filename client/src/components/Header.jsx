@@ -56,7 +56,7 @@ export default function Header() {
     <div className=" shadow-sm ">
       {/* bg-indigo-50 */}
       <header className="flex justify-between	items-center max-w-7xl mx-auto p-3">
-        <Link to={"/home"}>
+        <Link to={"/"}>
           <h1>
             <img src={Logo} alt="" className="max-w-[170px]" />
           </h1>
@@ -79,7 +79,7 @@ export default function Header() {
           </button>
         </form>
         <ul className="flex gap-4 items-center justify-end">
-          <Link to="/home">
+          <Link to="/">
             <li className="hidden sm:inline text-slate-700 hover:underline font-semibold">
               Home
             </li>
