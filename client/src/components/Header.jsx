@@ -72,9 +72,11 @@ export default function Header() {
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
-          <span className="bg-[#4c2aa382] p-3 rounded-r-md cursor-pointer">
+          <button
+            onSubmit={handleSubmit}
+            className="bg-[#4c2aa382] p-3 rounded-r-md cursor-pointer">
             <FaSearch className="text-white" />
-          </span>
+          </button>
         </form>
         <ul className="flex gap-4 items-center justify-end">
           <Link to="/home">
