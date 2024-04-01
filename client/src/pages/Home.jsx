@@ -149,6 +149,12 @@ export default function Home() {
           </div>
         )}
       </div>
+      {/* {Footer} */}
+      <footer>
+        <p className="text-center py-4 text-slate-600">
+          © 2023 Arber Real Estate “All Rights Reserved”
+        </p>
+      </footer>
     </div>
   );
 }
