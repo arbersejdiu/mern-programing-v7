@@ -130,7 +130,7 @@ export default function Home() {
       {/* Bottom */}
       <div className="flex flex-col gap-5 py-10 max-w-7xl mx-auto p-3">
         {saleListings && saleListings.length > 0 && (
-          <div>
+          <div className="w-full">
             <div className="pb-5">
               <h2 className="font-semibold text-slate-700 text-2xl">
                 Recent places for sale
@@ -141,9 +141,9 @@ export default function Home() {
                 Show more places for sale
               </Link>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex justify-between flex-wrap gap-4">
               {saleListings.map(listing => (
-                <ListingItem listing={listing} key={listing._id} />
+                <ListingItem listing={listing} key={listing._id} className="" />
               ))}
             </div>
           </div>

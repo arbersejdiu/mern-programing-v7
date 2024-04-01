@@ -9,7 +9,7 @@ export default function ListingItem({ listing }) {
       <Link to={`/listing/${listing._id}`}>
         <div className="bg-white rounded-md border flex flex-col gap-4 shadow-sm hover:shadow-md transiton-shadow overflow-hidden w-full sm:w-[250px]">
           <img
-            className="h-[320px] sm:h-[220px] w-full object-cover hover:scale-105 transition-scale duration-300"
+            className="h-[320px] sm:h-[220px]  w-full object-cover hover:scale-105 transition-scale duration-300"
             src={
               listing.imageUrls[0] ||
               "https://images.unsplash.com/photo-1448630360428-65456885c650?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D"
