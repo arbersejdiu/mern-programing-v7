@@ -161,7 +161,7 @@ export default function Setting() {
   return (
     <>
       <div className="max-w-lg mx-auto p-4">
-        <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
+        <h1 className="text-3xl font-semibold text-center my-7">Settings</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 ">
           <div className="image-content self-center">
             <input
