@@ -139,13 +139,13 @@ export default function Profile() {
               </Link>
               <Link
                 to={`/listing/${listing._id}`}
-                className="text-slate-700 font-semibold flex-1 truncate">
+                className="text-slate-700 font-semibold flex-1 truncate text-sm sm:text-lg">
                 <p>{listing.name}</p>
               </Link>
 
               <div className="flex flex-col items-end gap-4 sm:flex-row sm:gap-4 ">
                 <Link to={`/update-listing/${listing._id}`}>
-                  <button className="bg-green-700 text-white p-1 sm:p-2 rounded-md hover:opacity-95">
+                  <button className="bg-[#4c2aa382] text-white p-1 sm:p-2 rounded-md hover:opacity-95">
                     Edit
                   </button>
                 </Link>
