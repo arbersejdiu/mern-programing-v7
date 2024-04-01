@@ -161,7 +161,7 @@ export default function Setting() {
   return (
     <>
       <div className="max-w-lg mx-auto p-4">
-        <h1 className="text-3xl font-semibold text-center my-7">Setting</h1>
+        <h1 className="text-3xl font-semibold text-center my-7">Profile</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 ">
           <div className="image-content self-center">
             <input
@@ -230,9 +230,9 @@ export default function Setting() {
           </button>
         </form>
         <Link to={"/create-listing"}>
-          <button className="bg-slate-500 p-2 rounded-md text-white hover:opacity-95 w-full mt-2">
+          {/* <button className="bg-slate-500 p-2 rounded-md text-white hover:opacity-95 w-full mt-2">
             Add New Post
-          </button>
+          </button> */}
         </Link>
         <div className="flex justify-between my-2">
           <span
@@ -248,45 +248,6 @@ export default function Setting() {
         <p className="text-green-700 mt-5">
           {updateSuccess ? "Updated successfully" : ""}
         </p>
-        <button onClick={handleShowListings} className="text-green-700">
-          Show Listings
-        </button>
-        {showListingError ? (
-          <p className="text-red-700 mt-5">Something went wrong</p>
-        ) : (
-          ""
-        )}
-        {userListings &&
-          userListings.length > 0 &&
-          userListings.map(listing => (
-            <div
-              key={listing._id}
-              className="p-3 flex justify-between items-center my-5 border">
-              <Link to={`/listing/${listing._id}`}>
-                <img
-                  src={listing.imageUrls[0]}
-                  alt="Listing Cover"
-                  className="w-24 h-24 object-contain"
-                />
-              </Link>
-              <Link
-                to={`/listing/${listing._id}`}
-                className="text-slate-700 font-semibold flex-1 truncate">
-                <p>{listing.name}</p>
-              </Link>
-
-              <div className="flex flex-col">
-                <Link to={`/update-listing/${listing._id}`}>
-                  <button className="text-green-700">Edit</button>
-                </Link>
-                <button
-                  onClick={() => handleListingDelete(listing._id)}
-                  className="text-red-700">
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
       </div>
     </>
   );
