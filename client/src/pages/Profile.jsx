@@ -104,7 +104,7 @@ export default function Profile() {
               onClick={() => fileRef.current.click()}
               src={formData.avatar || currentUser.avatar}
               alt="profile"
-              className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2 border-2"
+              className="rounded-full h-14 w-14  sm:h-24 sm:w-24 object-cover cursor-pointer self-center mt-2 border-2"
             />
             <div className="flex flex-col">
               <p className="font-semibold">{currentUser.username}</p>
@@ -113,7 +113,7 @@ export default function Profile() {
           </div>
           <div>
             <Link to={"/create-listing"}>
-              <button className="bg-slate-500 p-2 rounded-md text-white hover:opacity-95 w-full mt-2">
+              <button className="bg-slate-500 p-1 sm:p-2 rounded-md text-white hover:opacity-95 w-full mt-2">
                 +Add New Post
               </button>
             </Link>
@@ -145,13 +145,13 @@ export default function Profile() {
 
               <div className="flex flex-col items-end gap-4 sm:flex-row sm:gap-4 ">
                 <Link to={`/update-listing/${listing._id}`}>
-                  <button className="bg-green-700 text-white p-2 rounded-md hover:opacity-95">
+                  <button className="bg-green-700 text-white p-1 sm:p-2 rounded-md hover:opacity-95">
                     Edit
                   </button>
                 </Link>
                 <button
                   onClick={() => handleListingDelete(listing._id)}
-                  className="text-white bg-red-700 p-2 rounded-md hover:opacity-95">
+                  className="text-white bg-red-700 p-1 sm:p-2  rounded-md hover:opacity-95 ">
                   Delete
                 </button>
               </div>
