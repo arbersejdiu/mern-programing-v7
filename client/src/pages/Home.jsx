@@ -49,17 +49,17 @@ export default function Home() {
     <div className="">
       {/* top */}
       <div className="flex flex-col gap-5 py-10 h-[80vh] justify-center max-w-7xl mx-auto p-3">
-        <h1 className="font-bold text-6xl text-[#4c2aa382] leading-[4.5rem]">
+        <h1 className="font-bold text-5xl sm:text-6xl text-[#4c2aa382] leading-[4.5rem]">
           Find you next <span className="text-slate-500">Perfect</span> <br />
           home to live
         </h1>
-        <p className="text-slate-600 text-lg">
+        <p className="text-slate-600 text-md sm:text-lg">
           Arber Real Estate will help to find your house fast and easy,
           <br />
           We believe in turning dreams into reality.
         </p>
         <Link to={"/search"}>
-          <button className="bg-[#4c2aa382] text-white p-2 rounded-md text-xl">
+          <button className="bg-[#4c2aa382] hover:opacity-95 text-white p-2 rounded-md text-md sm:text-xl">
             homes
           </button>
         </Link>
