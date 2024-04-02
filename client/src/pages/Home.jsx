@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
+import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "swiper/css/bundle";
 import ListingItem from "../components/ListingItem";
 
@@ -10,6 +12,9 @@ export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+
   SwiperCore.use([Navigation]);
 
   useEffect(() => {
@@ -45,6 +50,22 @@ export default function Home() {
     };
     fetchOfferListings();
   }, []);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
+  const handleSubmit = e => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("searchTerm", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
   return (
     <div className="">
       {/* top */}
@@ -58,11 +79,23 @@ export default function Home() {
           <br />
           We believe in turning dreams into reality.
         </p>
-        <Link to={"/search"}>
-          <button className="bg-[#4c2aa382] hover:opacity-95 text-white p-2 rounded-md text-md sm:text-xl">
-            homes
+        <form
+          onSubmit={handleSubmit}
+          className="rounded-md items-center  sm:flex ">
+          <input
+            type="text"
+            name="search"
+            placeholder="Search for your dream home..."
+            className="bg-transparent focus:outline-none w-64 sm:w-96 border p-3"
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+          />
+          <button
+            onSubmit={handleSubmit}
+            className="bg-[#4c2aa382] p-4 rounded-r-md cursor-pointer border">
+            <FaSearch className="text-white" />
           </button>
-        </Link>
+        </form>
       </div>
 
       {/* Swipper */}
@@ -151,7 +184,7 @@ export default function Home() {
       </div>
       {/* {Footer} */}
       <footer>
-        <p className="text-center py-4 text-slate-600">
+        <p className="text-center py-4 text-slate-600 text-sm sm:text-lg">
           © 2023 Arber Real Estate “All Rights Reserved”
         </p>
       </footer>

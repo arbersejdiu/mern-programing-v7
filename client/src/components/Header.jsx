@@ -18,7 +18,6 @@ import {
 import { useEffect, useState } from "react";
 export default function Header() {
   const { currentUser } = useSelector(state => state.user);
-  const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,21 +36,6 @@ export default function Header() {
     }
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set("searchTerm", searchTerm);
-    const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
-  };
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get("searchTerm");
-    if (searchTermFromUrl) {
-      setSearchTerm(searchTermFromUrl);
-    }
-  }, [location.search]);
   return (
     <div className=" shadow-sm ">
       {/* bg-indigo-50 */}
@@ -61,7 +45,7 @@ export default function Header() {
             <img src={Logo} alt="" className="max-w-[170px]" />
           </h1>
         </Link>
-        <form
+        {/* <form
           onSubmit={handleSubmit}
           className="bg-slate-200 pl-3 rounded-md items-center hidden sm:flex ">
           <input
@@ -77,7 +61,7 @@ export default function Header() {
             className="bg-[#4c2aa382] p-3 rounded-r-md cursor-pointer">
             <FaSearch className="text-white" />
           </button>
-        </form>
+        </form> */}
         <ul className="flex gap-4 items-center justify-end">
           <Link to="/">
             <li className="hidden sm:inline text-slate-700 hover:underline font-semibold">
