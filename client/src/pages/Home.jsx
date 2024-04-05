@@ -79,20 +79,18 @@ export default function Home() {
           <br />
           We believe in turning dreams into reality.
         </p>
-        <form
-          onSubmit={handleSubmit}
-          className="rounded-md items-center  sm:flex ">
+        <form onSubmit={handleSubmit} className="rounded-md items-center ">
           <input
             type="text"
             name="search"
             placeholder="Search for your dream home..."
-            className="bg-transparent focus:outline-none w-64 sm:w-96 border p-3"
+            className="p-3 focus:outline-none w-64 sm:w-96 border rounded-l-md"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
           <button
             onSubmit={handleSubmit}
-            className="bg-[#4c2aa382] p-4 rounded-r-md cursor-pointer border">
+            className="p-3 focus:outline-none bg-[#4c2aa382] border rounded-r-md cursor-pointer ">
             <FaSearch className="text-white" />
           </button>
         </form>
