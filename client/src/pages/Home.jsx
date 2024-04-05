@@ -7,6 +7,7 @@ import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "swiper/css/bundle";
 import ListingItem from "../components/ListingItem";
+import "../css/homeCss.css";
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -79,18 +80,20 @@ export default function Home() {
           <br />
           We believe in turning dreams into reality.
         </p>
-        <form onSubmit={handleSubmit} className="rounded-md items-center ">
+        <form
+          onSubmit={handleSubmit}
+          className="rounded-md items-center border w-max">
           <input
             type="text"
             name="search"
             placeholder="Search for your dream home..."
-            className="p-3 focus:outline-none w-64 sm:w-96 border rounded-l-md"
+            className="p-3 focus:outline-none w-64 sm:w-96 bg-transparent"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
           <button
             onSubmit={handleSubmit}
-            className="p-3 focus:outline-none bg-[#4c2aa382] border rounded-r-md cursor-pointer ">
+            className="focus:outline-none bg-[#4c2aa382] border rounded-r-md cursor-pointer h-full p-4">
             <FaSearch className="text-white" />
           </button>
         </form>
@@ -98,7 +101,14 @@ export default function Home() {
 
       {/* Swipper */}
 
-      <Swiper navigation>
+      <Swiper
+        navigation
+        className="py-10 max-w-7xl mx-auto"
+        style={{
+          "--swiper-navigation-color": "#fff",
+          "--swiper-navigation-background": "#fff",
+          "--swiper-navigation-size": "25px",
+        }}>
         {offerListings &&
           offerListings.length > 0 &&
           offerListings.map(listing => (
@@ -108,18 +118,18 @@ export default function Home() {
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
                   backgroundSize: "cover",
                 }}
-                className="h-[500px]"
+                className="h-[500px] rounded-none sm:rounded-md p-3"
                 key={listing._id}></div>
             </SwiperSlide>
           ))}
       </Swiper>
 
       {/* Bottom */}
-      <div className="flex flex-col gap-5 py-10 max-w-7xl mx-auto p-3">
+      <div className="py-10 max-w-7xl mx-auto">
         {offerListings && offerListings.length > 0 && (
-          <div>
-            <div className="pb-5">
-              <h2 className="font-semibold text-slate-700 text-2xl">
+          <div className="p-3 sm:p-0  grid-cols-4	">
+            <div className="pb-5 grid-cols-4 	">
+              <h2 className="font-semibold text-slate-700 text-2xl  grid-cols-4	">
                 Recent offers
               </h2>
               <Link
@@ -128,19 +138,21 @@ export default function Home() {
                 Show more offers
               </Link>
             </div>
-            <div className="flex flex-wrap gap-4">
-              {offerListings.map(listing => (
-                <ListingItem listing={listing} key={listing._id} />
-              ))}
+            <div className="">
+              <div className="flex flex-wrap gap-2">
+                {offerListings.map(listing => (
+                  <ListingItem listing={listing} key={listing._id} />
+                ))}
+              </div>
             </div>
           </div>
         )}
       </div>
       {/* Bottom */}
-      <div className="flex flex-col gap-5 py-10 max-w-7xl mx-auto p-3">
+      <div className="py-10 max-w-7xl mx-auto">
         {rentListings && rentListings.length > 0 && (
-          <div>
-            <div className="pb-5">
+          <div className="p-3 sm:p-0  grid-cols-4	">
+            <div className="pb-5 grid-cols-4 	">
               <h2 className="font-semibold text-slate-700 text-2xl">
                 Recent places for rent
               </h2>
@@ -150,7 +162,7 @@ export default function Home() {
                 Show more places for rent
               </Link>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-2">
               {rentListings.map(listing => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
@@ -159,10 +171,10 @@ export default function Home() {
         )}
       </div>
       {/* Bottom */}
-      <div className="flex flex-col gap-5 py-10 max-w-7xl mx-auto p-3">
+      <div className="py-10 max-w-7xl mx-auto">
         {saleListings && saleListings.length > 0 && (
-          <div className="w-full">
-            <div className="pb-5">
+          <div className="p-3 sm:p-0  grid-cols-4	">
+            <div className="pb-5 grid-cols-4 ">
               <h2 className="font-semibold text-slate-700 text-2xl">
                 Recent places for sale
               </h2>
@@ -172,7 +184,7 @@ export default function Home() {
                 Show more places for sale
               </Link>
             </div>
-            <div className="flex justify-between flex-wrap gap-4">
+            <div className="flex flex-wrap gap-2">
               {saleListings.map(listing => (
                 <ListingItem listing={listing} key={listing._id} className="" />
               ))}

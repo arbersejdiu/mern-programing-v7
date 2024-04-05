@@ -1,0 +1,12 @@
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: rgba(0, 0, 0, 80%);
+  size: 12px;
+  padding: 20px;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}

@@ -7,16 +7,16 @@ export default function ListingItem({ listing }) {
   return (
     <>
       <Link to={`/listing/${listing._id}`}>
-        <div className="bg-white rounded-md border flex flex-col gap-4 shadow-sm hover:shadow-md transiton-shadow overflow-hidden w-full sm:w-[250px]">
+        <div className="bg-white rounded-md border shadow-sm hover:shadow-md transiton-shadow overflow-hidden w-full  sm:max-w-[312px] ">
           <img
-            className="h-[320px] sm:h-[220px]  w-full object-cover hover:scale-105 transition-scale duration-300"
+            className="w-full sm:max-w-[320px] max-h-[240px] h-full object-cover hover:scale-105 transition-scale duration-300"
             src={
               listing.imageUrls[0] ||
               "https://images.unsplash.com/photo-1448630360428-65456885c650?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D"
             }
             alt="image"
           />
-          <div className="flex gap-2 flex-col p-2">
+          <div className="flex flex-col gap-2 p-2">
             <h1 className="truncate text-slate-700 font-medium">
               {listing.name}
             </h1>
