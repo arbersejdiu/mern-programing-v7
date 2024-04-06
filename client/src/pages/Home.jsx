@@ -70,7 +70,7 @@ export default function Home() {
   return (
     <div className="">
       {/* top */}
-      <div className="flex flex-col gap-5 py-10 h-[80vh] justify-center max-w-7xl mx-auto p-3">
+      <div className="flex flex-col gap-5 py-32 justify-center max-w-7xl mx-auto p-3">
         <h1 className="font-bold text-5xl sm:text-6xl text-[#4c2aa382] leading-[4.5rem]">
           Find you next <span className="text-slate-500">Perfect</span> <br />
           home to live
